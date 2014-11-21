@@ -7,14 +7,13 @@ import settings
 
 class Unit(object):
     def __init__(
-        self, unit_type, faction, team, 
+        self, unit_type, team, 
         hit_points, mass_build_cost, 
         mass_generate_rate, mass_bleed_rate,
         energy_build_cost, energy_generate_rate,
         energy_bleed_rate, position
     ):
         self.unit_type = unit_type
-        self.faction = faction  # Unit/structure set
         self.team = team  # Playable/AI Team
         self.hit_points = hit_points  # Total health
 
@@ -34,15 +33,15 @@ class Unit(object):
         y = self.cur_pos[1]
         pygame.draw.rect(screen, [0, 0, 0], pygame.Rect(x, y, 11, 11))
         pygame.draw.rect(
-            screen, settings.STRATEGIC_COLOURS[self.faction], 
+            screen, self.team.faction.strategic_colour, 
             pygame.Rect(x+1, y+1, 9, 9)
         )
 
 
 class MassExtractor(Unit):
-    def __init__(self, faction, team, position):
+    def __init__(self, team, position):
         super(MassExtractor, self).__init__(
-            "mass_extractor", faction, team,
+            "mass_extractor", team,
             100, 250.0, 1.0, 0.0, 
             500.0, 0.0, 5.0, position
         )
@@ -66,9 +65,9 @@ class MassExtractor(Unit):
 
 
 class PowerStation(Unit):
-    def __init__(self, faction, team, position):
+    def __init__(self, team, position):
         super(PowerStation, self).__init__(
-            "power_station", faction, team,
+            "power_station", team,
             100, 150.0, 0.0, 0.0, 
             500.0, 25.0, 5.0, position
         )

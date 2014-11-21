@@ -4,8 +4,11 @@ import sys
 
 from pygame.locals import * 
 
+import faction
 import settings
 import unit
+
+from team import Team
 
 pygame.init() 
  
@@ -22,16 +25,20 @@ def input(events):
    
 clock = pygame.time.Clock()
 
-factions = ["Earth Defence Force", "Ba'ktul Alliance", "Tyranos Collective"]
+teams = [
+  Team("mhallsmoore", faction.factions["EDF"]),
+  Team("jimbo", faction.factions["BAK"])
+]
+
 units = [
     unit.MassExtractor(
-        random.choice(factions), 1, 
+        teams[0],
         [random.randint(20, 1000), random.randint(20, 750)]
     ) for m in range(0,20)
 ]
 units.extend([
     unit.PowerStation(
-        random.choice(factions), 1, 
+        teams[1],
         [random.randint(20, 1000), random.randint(20, 750)]
     ) for m in range(0,20)
 ])
