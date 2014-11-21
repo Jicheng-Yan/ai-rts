@@ -92,6 +92,10 @@ class LandFactory(Unit):
     pass
 
 
+class PointDefence(Unit):
+    pass
+    
+
 class Artillery(Unit):
     pass
 

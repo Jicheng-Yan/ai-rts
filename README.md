@@ -11,7 +11,13 @@ AI-RTS will be written in a mixture of Python, C++, SDL and OpenGL leading to a 
 * Order-based mechanics allows incorporation of human player interaction (future feature!)
 * 2D/3D graphical overlay, which allows visual reply of simulation model, with adjustable speeds
 
+Requirements
+------------
+
+* PyGame
+
 Changelog
 ---------
 
-17/10/2014 - Basic order mechanics, game loop and single vehicle in a time-step simulation.
+21/11/2014 - Added PyGame for terrain overlay. Unit class added. Basic strategic icon drawing.
+17/11/2014 - Basic order mechanics, game loop and single vehicle in a time-step simulation.
