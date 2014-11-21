@@ -1,42 +1,44 @@
-from math import sqrt, sin, cos
+# vehicle.py
+
+from unit import Unit
 
 
-class Vehicle(object):
+class Vehicle(Unit):
     def __init__(
-        self, unit_type, faction, team, map_ref, dt,
-        position, max_speed, radius, hit_points
+        self, unit_type, team, hit_points, mass_build_cost, 
+        mass_generate_rate, mass_bleed_rate,
+        energy_build_cost, energy_generate_rate,
+        energy_bleed_rate, position, max_speed, radius
     ):
-        self.unit_type = unit_type
-        self.faction = faction  # Unit/structure set
-        self.team = team  # Playable/AI Team
-        self.map_ref = map_ref  # Map reference
-        self.dt = dt  # Timestep
-
+        super(Vehicle, self).__init__(
+            self, unit_type, team, 
+            hit_points, mass_build_cost, 
+            mass_generate_rate, mass_bleed_rate,
+            energy_build_cost, energy_generate_rate,
+            energy_bleed_rate, position
+        )
         self.max_speed = max_speed  # Metres/second
         self.radius = radius  # Metres
-        self.hit_points = hit_points  # Total health
-        self.max_mov_dist = self.max_speed * self.dt
 
         self.cur_speed = 0.0  # Metres/second
-        self.cur_health = hit_points  # Percent
-        self.cur_pos = position  # Current x, y co-ords
         self.cur_dest = position  # Destination x, y co-ords
 
     def set_destination(self, new_pos):
         self.cur_dest = new_pos
 
-    def update_position(self):
+    def update_position(self, dt):
         if self.cur_pos != self.cur_dest:
-            mov_dist = self.max_speed * self.dt
-            self.cur_pos[0] += self.max_mov_dist
-            self.cur_pos[1] += self.max_mov_dist
+            mov_dist = self.max_speed * dt
+            self.cur_pos[0] += mov_dist
+            self.cur_pos[1] += mov_dist
 
 
 class Tank(Vehicle):
-    def __init__(self, team, map_ref, dt):
+    def __init__(self, team, initial_position):
         super(Tank, self).__init__(
-            "tank", "faction1", team,
-            map_ref, dt, [0.0, 0.0], 10.0,
-            3.0, 1000
+            "tank", team, 100.0,
+            100.0, 0.0, 0.0,
+            250.0, 0.0, 0.0,
+            initial_position
         )
 

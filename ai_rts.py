@@ -43,8 +43,13 @@ units.extend([
     ) for m in range(0,20)
 ])
 
+t = 0.0
+framerate = 60.0  # Frames per second
+dt = 1000.0/framerate
+
 while True: 
-    clock.tick(60)
+    clock.tick(framerate)
+    t += dt
     input(pygame.event.get())
     screen.fill(settings.TERRAIN_COLOURS[0])
     for u in units:
